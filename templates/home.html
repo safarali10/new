@@ -1,0 +1,122 @@
+<!--&lt;!&ndash;-->
+<!--Author: Colorlib-->
+<!--Author URL: https://colorlib.com-->
+<!--License: Creative Commons Attribution 3.0 Unported-->
+<!--License URL: http://creativecommons.org/licenses/by/3.0/-->
+<!--&ndash;&gt;-->
+<!--{% load static %}-->
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--<title>Creative Colorlib SignUp Form</title>-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+<!--<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>-->
+<!--&lt;!&ndash; Custom Theme files &ndash;&gt;-->
+<!--<link href="{% static 'css/rstyle.css' %}" rel="stylesheet" type="text/css" media="all" />-->
+<!--&lt;!&ndash; //Custom Theme files &ndash;&gt;-->
+<!--&lt;!&ndash; web font &ndash;&gt;-->
+<!--<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">-->
+<!--&lt;!&ndash; //web font &ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--	&lt;!&ndash; main &ndash;&gt;-->
+<!--	<div class="main-w3layouts wrapper" style=" background: #E5ECA5;">-->
+<!--		<h1 style="color:black;">Form requirement</h1>-->
+<!--		<div class="main-agileinfo">-->
+<!--			<div class="agileits-top" style="background-color:#62ED71 ;">-->
+<!--				<form action="register" method="post">-->
+<!--					{% csrf_token %}-->
+<!--					<input class="text"  type="text" name="username" placeholder="Enter Your Name" required=""><br>-->
+<!--					<input class="text"  style="width:26rem; height:2.5rem; background-color:#62ED71;" type="date" name="date of birth" placeholder="Enter Your date of birth" required="date"><br><br>-->
+<!--					<input class="text"  type="text" name="Age" placeholder="Enter Your Age" required=""><br>-->
+<!--					<select class="text" style="width:26.4rem; height:2.5rem; background-color:#62ED71;" aria-label="Default select example">-->
+<!--  						<option selected>Select The Gender</option>-->
+<!--  						<option value="1">MALE</option>-->
+<!--						<option value="2">FEMALE</option>-->
+<!--						</select><br><br>-->
+<!--					<input class="text" type="text" name="phonenumber" placeholder="Enter Your Phonenumber" required="">-->
+<!--					<input class="text email" type="email" name="email" placeholder="Enter Your Email" required="">-->
+<!--					<input class="text" type="text" name="Address" placeholder="Enter Your Address" required=""><br>-->
+<!--					<input class="text" type="password" name="password" placeholder="Password" required="">-->
+<!--					<input class="text w3lpass" type="password" name="password1" placeholder="Confirm Password" required="">-->
+<!--					<div class="wthree-text">-->
+<!--						<label class="anim">-->
+<!--							<input type="checkbox" class="checkbox" required="">-->
+<!--							<span>I Agree To The Terms & Conditions</span>-->
+<!--						</label>-->
+<!--						<div class="clear"> </div>-->
+<!--					</div>-->
+<!--					<input type="submit" value="SIGNUP">-->
+<!--				</form>-->
+<!--				{% for msg in messages %}-->
+<!--				{{msg}}-->
+<!--				{% endfor %}-->
+<!--				<p>Don't have an Account? <a href="#"> Login Now!</a></p>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		&lt;!&ndash; copyright &ndash;&gt;-->
+<!--		<div class="colorlibcopy-agile">-->
+<!--			<p>© 2018 Signup Form. All rights reserved | Design by <a href="https://colorlib.com/" target="_blank">Travel</a></p>-->
+<!--		</div>-->
+<!--		&lt;!&ndash; //copyright &ndash;&gt;-->
+<!--		<ul class="colorlib-bubbles">-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--			<li></li>-->
+<!--		</ul>-->
+<!--	</div>-->
+<!--	&lt;!&ndash; //main &ndash;&gt;-->
+<!--</body>-->
+<!--</html>-->
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <br>
+    <br>
+    <a href="logout"><button type="submit" class="btn btn-primary">Logout</button></a>
+</form>
+<div id="confirmationMessage" style="display: none;">
+    <p>Order Confirmed</p>
+    <a href="/">Return to Home Page</a>
+</div>
+<script>
+    $("form").on("submit", function(e) {
+        e.preventDefault();
+        // Add your form submission logic here
+        $("#confirmationMessage").show();
+    });
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#id_department").change(function () {
+            var url = "/get_courses/";  // get the url of the `load_courses` view
+            var departmentId = $(this).val();  // get the selected department ID from the HTML input
+
+            $.ajax({                       // initialize an AJAX request
+                url: url,                    // set the url of the request (= /get_courses/)
+                data: {
+                    'department': departmentId       // add the department id to the GET parameters
+                },
+                success: function (data) {   // `data` is the return of the `load_courses` view function
+                    $("#id_course").html(data);  // replace the contents of the course input with the data that came from the server
+                }
+            });
+        });
+    });
+</script>
